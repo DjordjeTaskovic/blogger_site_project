@@ -25,7 +25,7 @@
 <div class="container box_1620">
 
 
-<a class="navbar-brand logo_h" href="index.php">The Blissful<span>Blogger</span></a>
+<a class="navbar-brand logo_h" href="index.php">Blissful<span>Blogger</span></a>
 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" 
 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
 aria-expanded="false" aria-label="Toggle navigation">
@@ -36,28 +36,25 @@ aria-expanded="false" aria-label="Toggle navigation">
 
 <div class="navbar-collapse offset collapse" id="navbarSupportedContent">
 <ul class="nav navbar-nav menu_nav justify-content-center">
-<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
-<li class="nav-item active"><a class="nav-link" href="index.php?page=posts">Posts</a></li>
-<li class="nav-item active"><a class="nav-link" href="index.php?page=contact">Contact</a></li>
-<li class="nav-item active"><a class="nav-link" href="index.php?page=author">Author</a></li>
+<li class="nav-item active"><a class="nav-link" href="index.php" title="Home">Home</a></li>
+<li class="nav-item active"><a class="nav-link" href="index.php?page=posts"title="News">News</a></li>
+<li class="nav-item active"><a class="nav-link" href="index.php?page=contact" title="Contact">Contact</a></li>
+<li class="nav-item active"><a class="nav-link" href="index.php?page=author" title="Author">Author</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right navbar-social">
 <?php
         if(!isset($_SESSION['korisnik'])){
-          echo '<li><a href="index.php?page=login"><span class="ti-user" aria-hidden="true"></span></a></li>
-          <li><a href="index.php?page=register"><span class="ti-flag" aria-hidden="true"></span></a></li>';
+          echo '<li><a href="index.php?page=login" title="Login"><span class="ti-user" aria-hidden="true"></span></a></li>
+          <li><a href="index.php?page=register" title="Register"><span class="ti-flag" aria-hidden="true"></span></a></li>';
         }else{
-          echo '<li><a href="index.php?page=logout">Log-out<span class="ti-shift-right" aria-hidden="true"></span></a></li>';
+          echo '<li><a href="index.php?page=logout" title="Logout">Logout<span class="ti-shift-right" aria-hidden="true"></span></a></li>';
         }
         if(isset($_SESSION['korisnik']) && $_SESSION['korisnik']->rolename=='user'){
-          echo '<li><a href="index.php?page=blogger">User-page<span class="ti-user" aria-hidden="true"></span></a></li>';
-
+          echo '<li><a href="index.php?page=blogger" title="Profile">Profile<span class="ti-user" aria-hidden="true"></span></a></li>';
         }
         if(isset($_SESSION['korisnik']) && $_SESSION['korisnik']->rolename=='admin'){
-          echo '<li><a href="admin-panel.php">Admin-page<span class="ti-user" aria-hidden="true"></span></a></li>';
-
+          echo '<li><a href="admin-panel.php" title="Admin">Admin<span class="ti-user" aria-hidden="true"></span></a></li>';
         }
-
 ?>
 </ul>
 </div>

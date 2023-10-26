@@ -4,3 +4,11 @@
  ::1 	 2021-06-07 20:12:03 	 There is no active transaction 
 /The Bllissful blogger/models/log_check.php 
  ::1 	 2021-06-08 10:50:13 	 Wrong user password due login submition. 
+ 	  	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 14:52:16 	 Error in register data format. 
+ 	  	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 14:53:21 	 Error in register data format. 
+ 	  	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 14:53:26 	 Error in register data format. 
+ 	  	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 15:12:03 	 Error in register data format. 
+petar 	 user 	 /blissfull-blogger/models/insert_blog.php 	 127.0.0.1 	 2023-10-26 16:49:44 	 Error in user blog submition. 
+petar 	 user 	 /blissfull-blogger/models/insert_blog.php 	 127.0.0.1 	 2023-10-26 16:51:02 	 Error in user blog submition. 
+petar 	 user 	 /blissfull-blogger/models/insert_blog.php 	 127.0.0.1 	 2023-10-26 16:52:50 	 Error in user blog submition. 
+petar 	 user 	 /blissfull-blogger/models/insert_blog.php 	 127.0.0.1 	 2023-10-26 16:53:06 	 Error in user blog submition. 

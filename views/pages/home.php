@@ -5,7 +5,7 @@
             <div class="hero-banner">
                 <div class="hero-banner__content">
                     <h3>Publish your passion, your unique</h3>
-                    <h1>Amazing and Beautiful blog</h1>
+                    <h1>Amazing and Beautiful Blog</h1>
                     <h4></h4>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     if (isset($_GET['perPage'])) {
                         $perPage = $_GET['perPage'];
                     } else {
-                        $perPage = 4;
+                        $perPage = 3;
                     }
                     if (isset($_GET['pagelist'])) {
                         $pagelist = $_GET['pagelist'];
@@ -32,8 +32,9 @@
                     $perPage = (int)$perPage;
                     $total = count(getAllFromTable('blogs'));
                     $pagesCount = round($total / $perPage);
-                    if (isset($_GET['cat'])) {
-                        $blogs = sortBlogsbyCat($perPage, $offset, $_GET['cat']);
+
+                    if (isset($_GET['category'])) {
+                        $blogs = sortBlogsbyCat($perPage, $offset, $_GET['category']);
                     } else {
                         $blogs = getBlogsbyPagination($perPage, $offset);
                     }
@@ -41,25 +42,31 @@
                     foreach ($blogs as $blog) :
                         $blogdate = explode(" ", $blog->date);
                         $newblogDate = date("M jS, Y", strtotime($blogdate[0]));
-
                         $comments = getcommentsbyBlogID($blog->bID); ?>
                         <div class="single-recent-blog-post">
                             <div class="thumb">
-                                <img class="img-fluid" src="assets/img/blogs/<?= $blog->url ?>" alt="<?= $blog->alt ?>">
+                                <a href="index.php?page=detail_page&source=blogs&itemID=<?= $blog->bID ?>">
+                                <img class="img-fluid bg-light" src="assets/img/blogs/<?= $blog->url ?>" alt="<?= $blog->alt ?>"/>
+                                </a>
                                 <ul class="thumb-info">
                                     <li><a><i class="ti-user"></i><?= $blog->username ?></a></li>
                                     <li><a><i class="ti-notepad"></i><?= $newblogDate ?></a></li>
-                                    <li>
-                                        <a href="#" class="com-btn" data-id="<?= $blog->bID ?>">
-                                            (<b><?= count($comments) ?></b>) Comments</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="details mt-20">
-                                <a href="blog-single.html">
+                               <div class="blog-tags">
+                                   <div class="tag-list-inline">
+                                       <a href="#" class="com-btn" 
+                                       data-id="<?= $blog->bID ?>">
+                                       (<b><?= count($comments) ?></b>) Comments</a>
+                                    </div>
+                                    <div class="tag-list-inline">
+                                        <a href="#"><?= $blog->kat ?></a>
+                                    </div>
+                               </div>
+                                <a href="index.php?page=detail_page&source=blogs&itemID=<?= $blog->bID ?>">
                                     <h3><?= $blog->blog_name ?></h3>
                                 </a>
-                                <p class="tag-list-inline">Tag:<a href="#"><?= $blog->kat ?></a></p>
 
                                 <p><?php if (strlen($blog->info) > 300) {
                                         echo substr($blog->info, 0, 300) . '...';
@@ -99,7 +106,7 @@
                             </div>
                         </div>
                     <?php endforeach;
-                    if (!isset($_GET['cat'])) :
+                    if (!isset($_GET['category'])) :
                     ?>
                         <div class="row">
                             <div class="col-lg-12">
@@ -112,16 +119,30 @@
                                                         <i class="ti-angle-left"></i>
                                                     </span>
                                                 </a>
-                                            </li>;
-                                        <?php
+                                            </li>
+                                            <?php
                                         endif;
                                         for ($i = 1; $i <= $pagesCount; $i++) :
-                                        ?>
-                                            <li class="page-item <?= $class ?>"><a href="index.php?pagelist=<?= $i ?>" class="page-link"><?= $i ?></a></li>
-                                        <?php endfor;
+                                            if ($pagelist == $i) :
+                                            ?>
+                                                <li class="page-item">
+                                                    <a href="index.php?pagelist=<?= $i ?>" class="page-link active-page">
+                                                        <?= $i ?>
+                                                    </a>
+                                                </li>
+                                            <?php else : ?>
+                                                <li class="page-item">
+                                                    <a href="index.php?pagelist=<?= $i ?>" class="page-link">
+                                                        <?= $i ?>
+                                                    </a>
+                                                </li>
+                                            <?php
+                                            endif;
+
+                                        endfor;
 
                                         if ($pagelist < $pagesCount) :
-                                        ?>
+                                            ?>
                                             <li class="page-item">
                                                 <a href="index.php?pagelist=<?= $pagelist + 1 ?>" class="page-link" aria-label="Next">
                                                     <span aria-hidden="true">

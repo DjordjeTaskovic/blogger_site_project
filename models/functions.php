@@ -103,7 +103,7 @@ function getcommentsbyID($ID){
     $r = $rez->fetchAll();
    return $r;
 }
-function insert_User($ime,$email,$adresa,$sifra,$bdate,$role,$profile){
+function insert_User($ime,$email,$adresa,$sifra,$bdate,$role,$image_id){
     global $conn;
     $upit = "INSERT INTO `users` 
     (`id`, `name`, `email`, `address`, `password`,`birthdate`,`id_role`,`id_img`)
@@ -116,7 +116,7 @@ function insert_User($ime,$email,$adresa,$sifra,$bdate,$role,$profile){
     $priprema->bindParam(":pass", $sifra);
     $priprema->bindParam(":bdate", $bdate);
     $priprema->bindParam(":uloga", $role);
-    $priprema->bindParam(":slikaid", $profile);
+    $priprema->bindParam(":slikaid", $image_id);
      return $priprema;
 }
 function getUser($email, $sifra){
@@ -292,6 +292,26 @@ function getBlogsbyPagination($limit,$offset){
     $r = $rez->fetchAll();
    return $r;
 
+}
+function getPosts($limit){
+    global $conn;
+    $rez = $conn->prepare("SELECT 
+     p.id as post_ID,
+     p.name as post_name,
+     p.info,p.date,
+     c.name as kat,
+     s.url,s.alt,
+     u.name as username
+    FROM posts p 
+    inner join categories c on p.id_category=c.id 
+    inner join images s on p.id_img=s.id 
+    inner join users u on p.id_user=u.id
+    ORDER BY post_ID
+    LIMIT $limit 
+    ");
+    $rez->execute();
+    $r = $rez->fetchAll();
+   return $r;
 }
 function getPostsbyPagination($limit,$offset){
         global $conn;

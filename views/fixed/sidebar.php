@@ -10,82 +10,43 @@
                 <ul class="cat-list mt-20">
                     <?php
                     $catis = getAllFromTable('categories');
-                    foreach ($catis as $cat) : ?>
+                    foreach ($catis as $cat): ?>
                         <li>
-                            <input type="submit" class="d-block sidebar_btn" 
-                            name="cat" value='<?= $cat->name ?>'/>
+                            <input type="submit" class="button" style="cursor: pointer;" 
+                            name="category" value="<?=$cat->name ?>"/>
                         </li>
                     <?php endforeach; ?>
                 </ul>
-
             </form>
         </div>
         <div class="single-sidebar-widget popular-post-widget">
-            <h4 class="single-sidebar-widget__title">Popular Post</h4>
+            <h4 class="single-sidebar-widget__title">Popular News</h4>
+            <?php 
+            $news = getPosts(3);
+            foreach($news as $p):
+                $pdate = explode(" ", $p->date);
+                $newDate = date("M jS, Y", strtotime($pdate[0]));
+            ?>
             <div class="popular-post-list">
                 <div class="single-post-list">
                     <div class="thumb">
-                        <img class="card-img rounded-0" src="assets/img/side_posts/post1.jpg" alt="side_post" />
-                        <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
-                        </ul>
-                    </div>
-                    <div class="details mt-20">
-                        <a href="blog-single.html">
-                            <h6>Accused of assaulting flight attendant miktake alaways</h6>
+                        <a href="index.php?page=detail_page&source=posts&itemID=<?= $p->post_ID ?>">
+                            <img class="card-img rounded-0 bg-light" src="assets/img/side_posts/<?= $p->url ?>" alt="<?= $p->alt ?>" />
                         </a>
-                    </div>
-                </div>
-                <div class="single-post-list">
-                    <div class="thumb">
-                        <img class="card-img rounded-0" src="assets/img/side_posts/post2.jpg" alt="side_post" />
-
                         <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
+                            <li><a href="#"><?=$p->username?></a></li>
+                            <li><a href="#"><?=$newDate?></a></li>
                         </ul>
                     </div>
                     <div class="details mt-20">
-                        <a href="blog-single.html">
-                            <h6>Tennessee outback steakhouse the
-                                worker diagnosed</h6>
-                        </a>
-                    </div>
-                </div>
-                <div class="single-post-list">
-                    <div class="thumb">
-                        <img class="card-img rounded-0" src="assets/img/side_posts/post3.jpg" alt="side_post" />
-
-                        <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
-                        </ul>
-                    </div>
-                    <div class="details mt-20">
-                        <a href="blog-single.html">
-                            <h6>Tennessee outback steakhouse the
-                                worker diagnosed</h6>
+                        <a href="index.php?page=detail_page&source=posts&itemID=<?= $p->post_ID ?>">
+                            <h6><?= $p->post_name ?></h6>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="single-post-list">
-                <div class="thumb">
-                    <img class="card-img rounded-0" src="assets/img/side_posts/post4.jpg" alt="side_post" />
-
-                    <ul class="thumb-info">
-                        <li><a href="#">Adam Colinge</a></li>
-                        <li><a href="#">Dec 15</a></li>
-                    </ul>
-                </div>
-                <div class="details mt-20">
-                    <a href="blog-single.html">
-                        <h6>Tennessee outback steakhouse the
-                            worker diagnosed</h6>
-                    </a>
-                </div>
-            </div>
+            <?php endforeach;?>
+           
         </div>
     </div>
 

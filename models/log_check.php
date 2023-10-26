@@ -13,7 +13,7 @@
                 $greske++;
                 $data = ["message"=>"Email is not in the right format."];
                 }
-                if(strlen($sifra)<10){
+                if(strlen($sifra) < 8){
                     $greske++;
                     $data = ["message" => "Password is not in right format."];
                 }

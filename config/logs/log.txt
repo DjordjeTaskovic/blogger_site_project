@@ -5,3 +5,6 @@ Djordje Taskovic 	 admin 	 /The Bllissful blogger/models/log_check.php 	 ::1 	 2
 Djordje Taskovic 	 admin 	 /The Bllissful blogger/models/log_check.php 	 ::1 	 2021-06-08 20:20:16 	 User logged in. 
 Djordje Taskovic 	 admin 	 /The Bllissful blogger/models/log_check.php 	 ::1 	 2021-06-08 21:23:11 	 User logged in. 
 Djordje Taskovic 	 admin 	 /The Bllissful blogger/models/log_check.php 	 ::1 	 2021-06-09 09:55:53 	 User logged in. 
+nikola 	 user 	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 14:55:11 	 User has been registered. 
+nikola 	 user 	 /blissfull-blogger/models/log_check.php 	 127.0.0.1 	 2023-10-26 15:02:37 	 User logged in. 
+petar 	 user 	 /blissfull-blogger/models/reg_insert.php 	 127.0.0.1 	 2023-10-26 15:13:18 	 User has been registered. 

@@ -1,7 +1,7 @@
 /* Loader Styles start here */
 .loader-wrapper {
     --line-width: 5px;
-    --curtain-color: #f1faee;
+    --curtain-color: #ede0ce;
     --outer-line-color: #cab392;
     --middle-line-color: #ff9907;
     --inner-line-color: #a56c1d;

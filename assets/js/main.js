@@ -9,10 +9,10 @@ $(document).ready(function() {
         let password = $('#password');
         let bdate = $('#bdate');
 
-      let usernameRe=/^[A-Z][a-z]{2,14}(\s[A-Z][a-z]{2,14})*$/;//Tonmawwq{12 karaktera}
+      let usernameRe = /^([a-zA-Z0-9]{4,14})+$/;
       let emailRe = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;//test@gmail.edu.com
       let addressRe=/^\w+(\s\w+)*$/;//123 Nasticeva Mike
-      let passRe=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/;//min 8 karaktera, i jedan broj i jedno slovo:
+      let passRe=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;//min 8 karaktera, i jedan broj i jedno slovo:
       
       let podaciForme = [];
         var spremno = true;
@@ -32,10 +32,21 @@ $(document).ready(function() {
               podaciForme.push(parametar.val());
               }
           }//proveri
-          Proveriparametar(username,usernameRe,"Nathaniel Baker");
-          Proveriparametar(email,emailRe,"test@gmail.edu.com");
-          Proveriparametar(address,addressRe,"123 Nasticeva Mike");
-          Proveriparametar(password,passRe,"thisismyp9(min 10).");
+
+          Proveriparametar(username, usernameRe, "Username must be greater then 4 characters.");
+          Proveriparametar(email, emailRe, "Email is not in the corret format.");
+          //address
+          
+          if (address.val() != '' && !addressRe.test( address.val()) ) {
+            spremno = false;
+            address.val("");
+            address.next().text('Address needs to be in correct order.');
+          }
+          else {
+            address.next().text('');
+            podaciForme.push(address.val());
+          }
+          Proveriparametar(password, passRe, "The password must have 8 characters, one letter and one number.");
           //date 
           var byear = bdate.val().substr(0,4);
           var cdate = new Date().getFullYear();
@@ -58,22 +69,18 @@ $(document).ready(function() {
              let adresa = podaciForme[2];
              let sifra = podaciForme[3];
              let bdate = podaciForme[4];
+             let button = true;
+             
+             let Send = Object.assign({ ime, mail, adresa, sifra, bdate, button });
+              // console.log(Send);
             $.ajax({
                 url : "models/reg_insert.php",
                 method : "POST",
                 dataType : "json",
-                data : {
-                    name:ime,
-                    email:mail,
-                    address:adresa,
-                    password:sifra,
-                    bdate:bdate,
-                    button : true
-                },
+                data : Send,
                 success: function(result){
                  alert(`${result.message}`);
                  if (result.message) {
-                 // location.reload();
                   window.location.replace("index.php?page=blogger");
                  }
               },
@@ -83,6 +90,12 @@ $(document).ready(function() {
                   $("#message_log").html(`
                   <p class="alert alert-warning">
                   ${xhr.status} You'r email or password informations are not correct.</p>`);
+              }
+              if (xhr.status == 422) {
+                $("#message_log").html(`
+                        <p class="alert alert-warning">
+                        There has been an error in data processing.
+                        </p>`)
               }
               if(xhr.status == 500){
                 $("#message_log").html(`
@@ -102,7 +115,7 @@ $(document).ready(function() {
         let email = $('#email');
         let password = $('#password');
       let emailRe = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;//test@gmail.edu.com
-      let passRe=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/;//min 10 karaktera, i jedan broj i jedno slovo:
+      let passRe=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;//min 10 karaktera, i jedan broj i jedno slovo:
       let podaciForme = [];
         var spremno = true;
           function Proveriparametar(parametar,regex,primer) {
@@ -122,9 +135,9 @@ $(document).ready(function() {
               }
           }//proveri
           Proveriparametar(email,emailRe,"test@gmail.edu.com");
-          Proveriparametar(password,passRe,"thisismyp9(min 10).");
+          Proveriparametar(password, passRe, "The password must have 8 characters, one letter and one number.");
+
             if(spremno){
-             
              let mail = podaciForme[0];
              let sifra = podaciForme[1];
             $.ajax({
@@ -149,6 +162,11 @@ $(document).ready(function() {
                       <p class="alert alert-warning">
                       ${xhr.status} You'r email or password informations are not correct.</p>`);
                   }
+                  if(xhr.status == 422){
+                    $("#message_log").html(`
+                    <p class="alert alert-warning">
+                   Error in data processing.</p>`);
+                }
                   if(xhr.status == 500){
                     $("#message_log").html(`
                     <p class="alert alert-warning">
